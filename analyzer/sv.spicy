@@ -8,9 +8,9 @@ public type Message = unit {
 	appid: uint16;
 	length: uint16;
 	# Infos über Simuated Flag und reserved bits(three bits are reserved for future standardized application and shall be set to 0 as default)
-	reserved1: bytes &size=2;	
-	# Reserved 2 field and the “reserved security” of Reserved 1 field form a 28 bits word defined by the security standard IEC/TS 62351-6.	
-	reserved2: bytes &size=2;		
+	reserved1: bytes &size=2;
+	# Reserved 2 field and the “reserved security” of Reserved 1 field form a 28 bits word defined by the security standard IEC/TS 62351-6.
+	reserved2: bytes &size=2;
 
 	APDU: ASN1::ASN1Message(True)[] &eod;
 
@@ -30,13 +30,13 @@ public type Message = unit {
 	var t: bytes;
 
 	svAPDUdata: ASN1::ASN1Message(True)[] &parse-from=self.APDU.front().application_data;
-	
+
 	savPDU: ASN1::ASN1Message(True)[] &parse-from=self.svAPDUdata.back().application_data;
 
 	# sequence_of_ASDUs: ASN1::ASN1Message(True)[] &parse-from=self.savPDU.front().body.seq;
 
 	on savPDU {
-		for ( element in self.savPDU.front().body.seq.submessages ) {
+		for ( element in self.savPDU[0].body.seq.submessages ) {
 			local tag = element.application_id;
 			switch (tag) {
 				case 0: {self.svID = element.application_data.decode(); }
@@ -55,12 +55,12 @@ public type Message = unit {
 	 	}
 	}
 
-	on %done { 
-		print self; 
+	on %done {
+		print self;
 		# print self.savPDU.front().body.seq;
 		}
 
-	on %error(msg: string) { 
+	on %error(msg: string) {
 		print msg; }
 
 };
@@ -68,7 +68,7 @@ public type Message = unit {
 
 type savPDU = unit {
 	iec61850_9_2_savPDU: bitfield(8) {
-		class: 6..7;	
+		class: 6..7;
 		p_or_c: 5;		# primitive or constructed Encoding
 		tag: 0..4;
 	};
@@ -77,7 +77,7 @@ type savPDU = unit {
 	noASDU: uint8;
 
 	iec61850_9_2_asdu: bitfield(8) {
-		class: 6..7;	
+		class: 6..7;
 		p_or_c: 5;		# primitive or constructed Encoding
 		tag: 0..4;
 	};
@@ -92,14 +92,14 @@ type savPDU = unit {
 
 type ASDU = unit {
 	iec61850_9_2_ASDUtype: bitfield(8) {
-		class: 6..7;	
+		class: 6..7;
 		p_or_c: 5;		# primitive or constructed Encoding
 		tag: 0..4;
 	};
 	length_ASDU: uint8;
 
 	iec61850_9_2_sv_id: bitfield(8) {
-		class: 6..7;	
+		class: 6..7;
 		p_or_c: 5;		# primitive or constructed Encoding
 		tag: 0..4;
 	};
@@ -107,7 +107,7 @@ type ASDU = unit {
 	sv_id: bytes &size=self.length_svid;
 
 	iec61850_9_2_smpCnt: bitfield(8) {
-		class: 6..7;	
+		class: 6..7;
 		p_or_c: 5;		# primitive or constructed Encoding
 		tag: 0..4;
 	};
@@ -115,7 +115,7 @@ type ASDU = unit {
 	smpCnt: bytes &size=self.length_smpCnt &convert=$$.to_uint(spicy::ByteOrder::Big);
 
 	iec61850_9_2_confRev: bitfield(8) {
-		class: 6..7;	
+		class: 6..7;
 		p_or_c: 5;		# primitive or constructed Encoding
 		tag: 0..4;
 	};
@@ -123,7 +123,7 @@ type ASDU = unit {
 	confRev: bytes &size=self.length_confRev &convert=$$.to_uint(spicy::ByteOrder::Big);
 
 	iec61850_9_2_smpSynch: bitfield(8) {
-		class: 6..7;	
+		class: 6..7;
 		p_or_c: 5;		# primitive or constructed Encoding
 		tag: 0..4;
 	};
