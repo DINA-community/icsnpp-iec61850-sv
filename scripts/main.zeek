@@ -8,7 +8,10 @@ export {
 
     # Define the record type that will contain the data to log.
     type Info: record {
-	ts: time	&log;
+	    ts: time	&log;
+	    src: string             &log &optional;
+        dst: string             &log &optional;
+        vlan: count             &log &optional;
         appid: int	&log;
         length: int	&log;
         smpCnt: int	&log;
@@ -16,20 +19,26 @@ export {
     };
 }
 
-event sv::sv_packet(appid: int, length: int, sv_id: string, smpCnt: int) {
+event sv::sv_packet(pkt: raw_pkt_hdr, appid: int, length: int, sv_id: string, smpCnt: int) {
     # print "Detected a sampled value packet.";
 
     local rec: sv::Info = [$ts=network_time(), $appid=appid, $length=length, $smpCnt=smpCnt, $sv_id=sv_id];
+
+    if ( pkt?$l2 ) {
+        if ( pkt$l2?$src )  rec$src  = pkt$l2$src;
+        if ( pkt$l2?$dst )  rec$dst  = pkt$l2$dst;
+        if ( pkt$l2?$vlan ) rec$vlan = pkt$l2$vlan;
+    }
 
     Log::write(sv::LOG, rec);
 }
 
 event zeek_init() &priority=5 {
         print "Initializing IEC 61850 SV analyzer";
-        
+
         # Create the stream. This adds a default filter automatically.
         Log::create_stream(sv::LOG, [$columns=Info, $path="sv"]);
-        
+
         if ( ! PacketAnalyzer::register_packet_analyzer(PacketAnalyzer::ANALYZER_VLAN, 0x88ba, PacketAnalyzer::ANALYZER_SPICY_SV)) {
             print "cannot register IEC 61850 SV analyzer for VLAN packets";
         } else {
