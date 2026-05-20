@@ -16,7 +16,7 @@ For additional information on this log file, see the *Logging Capabilities* sect
 This script is available as a package for [Zeek Package Manager](https://docs.zeek.org/projects/package-manager/en/stable/index.html). It requires [Spicy](https://docs.zeek.org/projects/spicy/en/latest/) and the [Zeek Spicy plugin](https://docs.zeek.org/projects/spicy/en/latest/zeek.html).
 
 ```bash
-$ cd IEC61850/SV
+$ cd icsnpp-iec61850-sv
 $ cmake . && make install
 $ zeek -NN | grep ANALYZER_SPICY_SV
 ```
@@ -49,7 +49,8 @@ decoding as bytes implemented
 ### Paket Structure
 
 IMPORTS Data FROM ISO-IEC-9506-2
-```
+
+```text
 IEC 61850-9-2 Specific Protocol ::= CHOICE {
   savPdu [APPLICATION 0] IMPLICIT SavPdu,
 }
