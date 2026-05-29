@@ -24,7 +24,7 @@ jobs:
           repository: DINA-community/.github
           path: org-github
       
-      - name: Run Labeler
+      - name: Set Labels to DINA default
         uses: crazy-max/ghaction-github-labeler@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

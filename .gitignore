@@ -1,1 +1,112 @@
+
+
+# ==============================================================================
+# Created by https://gitignores.com/
+# TOOL-SPECIFIC TEMPLATE for CMake
+# Website: https://cmake.org/
+# Repository: https://github.com/Kitware/CMake
+# ==============================================================================
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# BUILD ARTIFACTS & DISTRIBUTION
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+*.cmake.bak
+*.cmake.configure
+*.cmake.in
+*.in
+build/
+cmake-build-*/
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles/
+CMakeLists.txt.bak
+compile_commands.json
+CPack/
+CPackConfig.cmake
+CPackSourceConfig.cmake
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# BUILD files for this project
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 build
+sv.hlto
+Makefile
+spicy-modules
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# DEPENDENCY MANAGEMENT & PACKAGE CACHE
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+.cache/cmake/
+.cmake/
+packages/
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# DEVELOPMENT & RUNTIME ARTIFACTS
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+cmake.log
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# TESTING & QUALITY ASSURANCE
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+.gcov/
+coverage/
+CTestCostData.txt
+CTestTestfile.cmake
+Testing/
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# TOOL-SPECIFIC PATTERNS
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+.7z
+.backup/
+.bak/
+.bash
+.checksum
+.dependencies/
+.deploy/
+.deployment/
+.deps/
+.diff
+.fish
+.hash
+.hashes
+.hlto
+.lock
+.lockfile
+.md5
+.patch
+.rar
+.sh
+.sha1
+.sha256
+.sha512
+.sig
+.signature
+.state
+.status
+.tar
+.tar.gz
+.tgz
+.timestamp
+.timestamps
+.zip
+.zsh
+demo/
+demos/
+doc/
+docs/
+example/
+examples/
+install/
+install_manifest.txt
+installed/
+man/
+manual/
+modules/
+templates/
+toolchains/
